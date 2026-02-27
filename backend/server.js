@@ -3,9 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require('multer');
-app.get('/', (req, res) => {
-  res.send('Portfolio API is live and running!');
-});
+
 // New Cloudinary imports
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
@@ -13,6 +11,9 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const PortfolioItem = require('./models/PortfolioItem');
 
 const app = express();
+app.get('/', (req, res) => {
+  res.send('Portfolio API is live and running!');
+});
 app.use(cors());
 app.use(express.json());
 // 1. Connect to MongoDB
