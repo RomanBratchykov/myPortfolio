@@ -5,7 +5,7 @@ export default function PortfolioGrid() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/content')
+    fetch('https://myportfolio-8tka.onrender.com/api/upload')
       .then(res => res.json())
       .then(data => setItems(data))
       .catch(err => console.error(err));

@@ -19,7 +19,7 @@ export default function AdminUpload() {
     formData.append('mediaFile', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('https://myportfolio-8tka.onrender.com/api/upload', {
         method: 'POST',
         headers: { 'x-admin-password': password },
         body: formData,
