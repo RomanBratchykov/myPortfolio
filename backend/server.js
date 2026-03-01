@@ -3,8 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary');
 
 const PortfolioItem = require('./models/PortfolioItem');
 
@@ -14,23 +13,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 2. Configure Cloudinary
+// 2. Configure Cloudinary v2
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// 3. Cloudinary storage for Multer
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'my_portfolio_media',
-    resource_type: 'auto'
-  },
-});
+// 3. Multer with memory storage — file stays in RAM, gets piped to Cloudinary
+const upload = multer({ storage: multer.memoryStorage() });
 
-const upload = multer({ storage: storage });
+// Helper: upload a buffer to Cloudinary and return the result
+const uploadToCloudinary = (buffer, options) =>
+  new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(options, (error, result) => {
+      if (error) reject(error);
+      else resolve(result);
+    });
+    stream.end(buffer);
+  });
 
 // 4. Admin auth middleware
 const verifyAdmin = (req, res, next) => {
@@ -59,7 +60,7 @@ app.get('/api/content', async (req, res) => {
 app.post('/api/upload', verifyAdmin, (req, res, next) => {
   upload.single('mediaFile')(req, res, (err) => {
     if (err) {
-      console.error('Multer/Cloudinary error:', err);
+      console.error('Multer error:', err);
       return res.status(500).json({ error: 'File upload failed: ' + err.message });
     }
     next();
@@ -70,10 +71,15 @@ app.post('/api/upload', verifyAdmin, (req, res, next) => {
       return res.status(400).json({ error: 'No file was uploaded.' });
     }
 
+    const result = await uploadToCloudinary(req.file.buffer, {
+      folder: 'my_portfolio_media',
+      resource_type: 'auto'
+    });
+
     const newItem = await PortfolioItem.create({
       title: req.body.title,
       category: req.body.category,
-      fileUrl: req.file.path
+      fileUrl: result.secure_url
     });
 
     res.status(201).json({ message: 'Successfully uploaded!', item: newItem });
