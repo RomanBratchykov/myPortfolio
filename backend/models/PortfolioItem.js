@@ -15,11 +15,15 @@ const portfolioItemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+
+    publicId: {
+      type: String,
+      required: true // Storing this ensures we can delete the file from Cloudinary later
+    }
+  },
+  {
+    timestamps: true // Automatically adds createdAt and updatedAt fields
+  });
 
 // Export it so our server can use it
 module.exports = mongoose.model('PortfolioItem', portfolioItemSchema);

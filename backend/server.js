@@ -3,13 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const cloudinary = require('cloudinary');
-
+const cloudinary = require('cloudinary').v2; // FIX: Added .v2 for Cloudinary SDK
 const PortfolioItem = require('./models/PortfolioItem');
 
 const app = express();
 
-// 1. Middleware first — before any routes
+// 1. Middleware first
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +19,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// 3. Multer with memory storage — file stays in RAM, gets piped to Cloudinary
+// 3. Multer with memory storage
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Helper: upload a buffer to Cloudinary and return the result
@@ -48,6 +47,7 @@ app.get('/', (req, res) => {
   res.send('Portfolio API is live and running!');
 });
 
+// Fetch all items
 app.get('/api/content', async (req, res) => {
   try {
     const items = await PortfolioItem.find().sort({ createdAt: -1 });
@@ -57,46 +57,53 @@ app.get('/api/content', async (req, res) => {
   }
 });
 
-app.post('/api/upload', verifyAdmin, (req, res, next) => {
-  upload.single('mediaFile')(req, res, (err) => {
-    if (err) {
-      console.error('Multer error:', err);
-      return res.status(500).json({ error: 'File upload failed: ' + err.message });
-    }
-    next();
-  });
-}, async (req, res) => {
+// Upload a new item (Cleaned up middleware chaining)
+app.post('/api/upload', verifyAdmin, upload.single('mediaFile'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file was uploaded.' });
     }
 
+    // Upload to Cloudinary
     const result = await uploadToCloudinary(req.file.buffer, {
       folder: 'my_portfolio_media',
       resource_type: 'auto'
     });
 
+    // Save to MongoDB with publicId
     const newItem = await PortfolioItem.create({
       title: req.body.title,
       category: req.body.category,
-      fileUrl: result.secure_url
+      fileUrl: result.secure_url,
+      publicId: result.public_id // FIX: Storing the Cloudinary public ID
     });
 
     res.status(201).json({ message: 'Successfully uploaded!', item: newItem });
   } catch (error) {
-    console.error(error);
+    console.error('Upload Error:', error);
     res.status(500).json({ error: 'Failed to save item: ' + error.message });
   }
 });
 
+// Delete an item
 app.delete('/api/content/:id', verifyAdmin, async (req, res) => {
   try {
-    const item = await PortfolioItem.findByIdAndDelete(req.params.id);
+    const item = await PortfolioItem.findById(req.params.id);
     if (!item) {
       return res.status(404).json({ error: 'Item not found.' });
     }
-    res.json({ message: 'Item deleted successfully.' });
+
+    // FIX: Delete the image from Cloudinary first
+    if (item.publicId) {
+      await cloudinary.uploader.destroy(item.publicId);
+    }
+
+    // Then delete the document from MongoDB
+    await item.deleteOne();
+    
+    res.json({ message: 'Item and media deleted successfully.' });
   } catch (error) {
+    console.error('Delete Error:', error);
     res.status(500).json({ error: 'Failed to delete item.' });
   }
 });
