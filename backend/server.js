@@ -111,8 +111,11 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
   
-  // Once the port is open and Render is happy, connect to MongoDB Atlas
-  mongoose.connect(process.env.MONGO_URI)
+  // Connect to MongoDB with special flags to fix Render's network bug
+  mongoose.connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 5000, // Stop hanging after 5 seconds
+    family: 4 // THIS IS THE MAGIC FIX: It forces Render to use IPv4
+  })
     .then(() => {
       console.log('Connected to MongoDB Atlas!');
     })
