@@ -1,3 +1,6 @@
+console.log("Checking Environment Variables:");
+console.log("MONGO_URI exists?", !!process.env.MONGO_URI);
+console.log("Cloudinary Key exists?", !!process.env.CLOUDINARY_API_KEY);
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
