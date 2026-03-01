@@ -43,9 +43,10 @@ export default function PortfolioGrid() {
     setSelectedItem(null);
   };
 
-  const renderMedia = (item, isModal = false) => {
+ const renderMedia = (item, isModal = false) => {
+    // FIX 1: If it's in the modal, let the image take up to 85% of the screen height (85vh)
     const height = isModal ? "auto" : "250";
-    const maxHeight = isModal ? "400px" : "auto";
+    const maxHeight = isModal ? "85vh" : "auto";
 
     if (item.category === 'video') {
       return (
@@ -54,7 +55,7 @@ export default function PortfolioGrid() {
           height={height}
           src={item.fileUrl}
           controls
-          sx={{ objectFit: 'cover', backgroundColor: '#000', maxHeight }}
+          sx={{ objectFit: 'contain', backgroundColor: '#000', maxHeight }}
         />
       );
     }
@@ -69,18 +70,25 @@ export default function PortfolioGrid() {
       );
     }
 
+    // FIX 2: Default fallback for Images / Designs
     return (
       <CardMedia
         component="img"
         height={height}
         image={item.fileUrl}
         alt={item.title}
-        sx={{ objectFit: 'cover', maxHeight }}
+        sx={{ 
+          // 'contain' ensures the whole image is visible without cropping!
+          objectFit: 'contain', 
+          maxHeight: maxHeight,
+          // Adds a subtle dark background in the grid if the image doesn't perfectly fit the 250px box
+          backgroundColor: isModal ? 'transparent' : '#1a1a1a', 
+          p: isModal ? 0 : 1 // Adds a tiny bit of padding in the grid view
+        }}
       />
     );
   };
 
-  // 🚨 REMOVED the top-level if(loading) and if(error) from here! 🚨
 
   return (
     <div>
