@@ -13,6 +13,14 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline /> {/* This resets basic browser margins and applies the dark background */}
@@ -21,9 +29,12 @@ export default function App() {
         <AppBar position="sticky" elevation={3}>
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-              My Creative Portfolio
+              My Portfolio
             </Typography>
-            <Button color="inherit" component={RouterLink} to="/">Gallery</Button>
+            <Button color="inherit" component={RouterLink} to="/">Main</Button>
+            <Button color="inherit" onClick={() => scrollToSection('my-work-section')}>
+              My Work
+            </Button>
             <Button color="inherit" component={RouterLink} to="/admin">Admin</Button>
           </Toolbar>
         </AppBar>

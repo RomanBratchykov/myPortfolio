@@ -90,17 +90,17 @@ export default function PortfolioGrid() {
           <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }}>
             <Avatar 
               alt="Roman" 
-              src="https://via.placeholder.com/300" // Replace with your actual photo URL
+              src="/romanphoto.png" // Replace with your actual photo URL
               sx={{ width: 250, height: 250, boxShadow: 3 }} 
             />
           </Grid>
           <Grid item xs={12} md={8}>
             <Typography variant="h3" fontWeight="bold" gutterBottom>
-              Hi, I'm Roman
+              Hi, I'm Roman Bratchykov
             </Typography>
             <Typography variant="h6" color="text.secondary" paragraph>
               I am a 2nd-year Computer Science student at Chernivtsi National University. 
-              I specialize in full-stack web development and have a deep interest in software engineering, mobile game development, and creating cross-platform applications.
+              I specialize in design and photography and have a deep interest in desing, music, software engineering, mobile game development, and creating cross-platform applications.
             </Typography>
             
             <Box sx={{ mb: 3 }}>
@@ -109,15 +109,34 @@ export default function PortfolioGrid() {
               <Chip label="React & Vite" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Node.js" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Entity Framework" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Java" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Adobe Cloud(Photoshop, Illustrator, Premier Pro, After)" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Kotlin" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Affinity Designer" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Figma" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="FL Studio" color="primary" sx={{ mr: 1, mb: 1 }} />
+            </Box>
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Soft Skills:</Typography>
+              <Chip label="Project Management" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Communication" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Problem Solving" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Teamwork" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Adaptability" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Leadership" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/yourusername" target="_blank">
+              <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/RomanBratchykov" target="_blank">
                 GitHub
               </Button>
-              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://linkedin.com/in/yourusername" target="_blank">
+              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.linkedin.com/in/roman-bratchykov-9112b5330" target="_blank">
                 LinkedIn
+              </Button>
+              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.behance.net/romanbratchykov" target="_blank">
+                Behance
+              </Button>
+              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.spotify.com/" target="_blank">
+                Spotify
               </Button>
             </Box>
           </Grid>
