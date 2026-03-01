@@ -5,6 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 export default function AdminUpload() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('design');
+  const [description, setDescription] = useState(''); // NEW STATE
   const [file, setFile] = useState(null);
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
@@ -16,6 +17,7 @@ export default function AdminUpload() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('category', category);
+    formData.append('description', description); // NEW FORM DATA
     formData.append('mediaFile', file);
 
     try {
@@ -37,7 +39,7 @@ export default function AdminUpload() {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: 'auto', mt: 4 }}>
+    <Paper elevation={3} sx={{ p: 4, maxWidth: 600, mx: 'auto', mt: 4 }}>
       <Typography variant="h4" gutterBottom fontWeight="bold">
         Admin Dashboard
       </Typography>
@@ -50,7 +52,6 @@ export default function AdminUpload() {
           label="Admin Password" 
           type="password" 
           variant="outlined" 
-          fullWidth 
           required 
           onChange={(e) => setPassword(e.target.value)} 
         />
@@ -58,9 +59,19 @@ export default function AdminUpload() {
         <TextField 
           label="Project Title" 
           variant="outlined" 
-          fullWidth 
           required 
           onChange={(e) => setTitle(e.target.value)} 
+        />
+
+        {/* NEW DESCRIPTION FIELD */}
+        <TextField 
+          label="Project Description" 
+          variant="outlined" 
+          multiline
+          rows={4}
+          required 
+          placeholder="What did you put into this work?"
+          onChange={(e) => setDescription(e.target.value)} 
         />
         
         <TextField
@@ -68,19 +79,14 @@ export default function AdminUpload() {
           label="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          fullWidth
         >
           <MenuItem value="design">Design</MenuItem>
           <MenuItem value="music">Music</MenuItem>
           <MenuItem value="video">Video</MenuItem>
+          <MenuItem value="web">Web Development</MenuItem>
         </TextField>
 
-        <Button
-          variant="outlined"
-          component="label"
-          startIcon={<CloudUploadIcon />}
-          sx={{ py: 1.5 }}
-        >
+        <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />} sx={{ py: 1.5 }}>
           {file ? file.name : "Select Media File"}
           <input type="file" hidden required onChange={(e) => setFile(e.target.files[0])} />
         </Button>

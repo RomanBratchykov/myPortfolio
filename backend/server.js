@@ -75,6 +75,7 @@ app.post('/api/upload', verifyAdmin, upload.single('mediaFile'), async (req, res
     const newItem = await PortfolioItem.create({
       title: req.body.title,
       category: req.body.category,
+      description: req.body.description,
       fileUrl: result.secure_url,
       publicId: result.public_id 
     });
