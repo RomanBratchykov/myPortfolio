@@ -1,14 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Grid, Card, CardMedia, CardContent, Typography, Chip, Box } from '@mui/material';
+import { Grid, Card, CardMedia, CardContent, Typography, Chip, Box, CircularProgress, Alert } from '@mui/material';
 
 export default function PortfolioGrid() {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('https://myportfolio-8tka.onrender.com/api/content')
-      .then(res => res.json())
-      .then(data => setItems(data))
-      .catch(err => console.error(err));
+      .then(res => {
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        setItems(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
   // Helper function to decide which HTML element to use based on category
@@ -56,12 +67,32 @@ export default function PortfolioGrid() {
     );
   };
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ mt: 4 }}>
+        Could not load portfolio: {error}
+      </Alert>
+    );
+  }
+
   return (
     <div>
       <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold', mb: 4 }}>
         Featured Work
       </Typography>
-      
+
+      {items.length === 0 && (
+        <Typography color="text.secondary">No items uploaded yet.</Typography>
+      )}
+
       <Grid container spacing={4}>
         {items.map(item => (
           <Grid item key={item.id} xs={12} sm={6} md={4}>
