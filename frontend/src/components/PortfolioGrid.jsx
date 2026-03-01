@@ -6,6 +6,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { Link } from '@mui/icons-material';
 
 export default function PortfolioGrid() {
   const [items, setItems] = useState([]);
@@ -79,12 +80,11 @@ export default function PortfolioGrid() {
     );
   };
 
-  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}><CircularProgress /></Box>;
-  if (error) return <Alert severity="error" sx={{ mt: 4 }}>Could not load portfolio: {error}</Alert>;
+  // 🚨 REMOVED the top-level if(loading) and if(error) from here! 🚨
 
   return (
     <div>
-      {/* --- ABOUT ME SECTION --- */}
+      {/* --- ABOUT ME SECTION (Instantly Visible) --- */}
       <Box sx={{ mb: 8, mt: 4 }}>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -100,7 +100,7 @@ export default function PortfolioGrid() {
             </Typography>
             <Typography variant="h6" color="text.secondary" paragraph>
               I am a 2nd-year Computer Science student at Chernivtsi National University. 
-              I specialize in design and photography and have a deep interest in desing, music, software engineering, mobile game development, and creating cross-platform applications.
+              I specialize in design and have a deep interest in music, software engineering, mobile game development, and creating cross-platform applications.
             </Typography>
             
             <Box sx={{ mb: 3 }}>
@@ -109,7 +109,7 @@ export default function PortfolioGrid() {
               <Chip label="React & Vite" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Node.js" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Entity Framework" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Adobe Cloud(Photoshop, Illustrator, Premier Pro, After)" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Adobe Cloud (Photoshop, Illustrator, Premiere Pro, After Effects)" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Kotlin" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Affinity Designer" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Figma" color="primary" sx={{ mr: 1, mb: 1 }} />
@@ -125,17 +125,17 @@ export default function PortfolioGrid() {
               <Chip label="Leadership" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
 
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
               <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/RomanBratchykov" target="_blank">
                 GitHub
               </Button>
               <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.linkedin.com/in/roman-bratchykov-9112b5330" target="_blank">
                 LinkedIn
               </Button>
-              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.behance.net/romanbratchykov" target="_blank">
+              <Button variant="outlined" startIcon={<Link />} href="https://www.behance.net/romanbratchykov" target="_blank">
                 Behance
               </Button>
-              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.spotify.com/" target="_blank">
+              <Button variant="outlined" startIcon={<Link />} href="https://www.spotify.com/" target="_blank">
                 Spotify
               </Button>
             </Box>
@@ -146,35 +146,47 @@ export default function PortfolioGrid() {
       <Divider sx={{ mb: 6 }} />
 
       {/* --- PORTFOLIO GRID --- */}
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 4 }}>
+      {/* Added id="my-work-section" here just in case you use the smooth scroll button! */}
+      <Typography id="my-work-section" variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 4, pt: 2 }}>
         Featured Work
       </Typography>
 
-      {items.length === 0 && <Typography color="text.secondary">No items uploaded yet.</Typography>}
-
-      <Grid container spacing={4}>
-        {items.map(item => (
-          <Grid item key={item._id} xs={12} sm={6} md={4}>
-            <Card 
-              onClick={() => handleCardClick(item)}
-              sx={{ 
-                height: '100%', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                cursor: 'pointer',
-                transition: '0.3s', 
-                '&:hover': { transform: 'translateY(-5px)', boxShadow: 6 } 
-              }}
-            >
-              {renderMedia(item)}
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">{item.title}</Typography>
-                <Chip label={item.category.toUpperCase()} color={item.category === 'music' ? 'secondary' : 'primary'} size="small" variant="outlined" />
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      {/* 🚨 NEW: Conditional rendering just for the grid area! 🚨 */}
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
+          <CircularProgress color="primary" />
+        </Box>
+      ) : error ? (
+        <Alert severity="error" sx={{ mt: 4 }}>
+          Could not load portfolio: {error}
+        </Alert>
+      ) : items.length === 0 ? (
+        <Typography color="text.secondary">No items uploaded yet.</Typography>
+      ) : (
+        <Grid container spacing={4}>
+          {items.map(item => (
+            <Grid item key={item._id} xs={12} sm={6} md={4}>
+              <Card 
+                onClick={() => handleCardClick(item)}
+                sx={{ 
+                  height: '100%', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  cursor: 'pointer',
+                  transition: '0.3s', 
+                  '&:hover': { transform: 'translateY(-5px)', boxShadow: 6 } 
+                }}
+              >
+                {renderMedia(item)}
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">{item.title}</Typography>
+                  <Chip label={item.category.toUpperCase()} color={item.category === 'music' ? 'secondary' : 'primary'} size="small" variant="outlined" />
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
 
       {/* --- PROJECT DETAIL MODAL --- */}
       <Dialog open={openModal} onClose={handleClose} maxWidth="md" fullWidth>
