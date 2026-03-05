@@ -143,7 +143,7 @@ export default function PortfolioGrid() {
               <Button variant="outlined" startIcon={<Link />} href="https://www.behance.net/romanbratchykov" target="_blank">
                 Behance
               </Button>
-              <Button variant="outlined" startIcon={<Link />} href="https://www.spotify.com/" target="_blank">
+              <Button variant="outlined" startIcon={<Link />} href="https://open.spotify.com/artist/1VdoNOymy0lWV5XnbzNxpf?si=q8J6bZv4RPemJO6RUHUF7w" target="_blank">
                 Spotify
               </Button>
               <Button variant="outlined" startIcon={<Link />} href="https://www.fiverr.com/s/Zmrlxpj" target="_blank">
