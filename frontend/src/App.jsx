@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link as RouterLink } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline, AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline, AppBar, Toolbar, Typography, Button, Container, Dialog } from '@mui/material';
 import PortfolioGrid from './components/PortfolioGrid';
 import AdminUpload from './components/AdminUpload';
 
@@ -13,6 +14,21 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
+  // --- NEW: State for the Admin Modal ---
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+
+  // --- NEW: Hotkey Listener (Ctrl + M) ---
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'm') {
+        e.preventDefault();
+        setIsAdminOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -35,7 +51,10 @@ export default function App() {
             <Button color="inherit" onClick={() => scrollToSection('my-work-section')}>
               My Work
             </Button>
-            <Button color="inherit" component={RouterLink} to="/admin">Admin</Button>
+            {/* UPDATED: Admin button now opens the modal instead of routing */}
+            {/* <Button color="inherit" onClick={() => setIsAdminOpen(true)}>
+              Admin
+            </Button> */}
           </Toolbar>
         </AppBar>
 
@@ -43,9 +62,20 @@ export default function App() {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Routes>
             <Route path="/" element={<PortfolioGrid />} />
-            <Route path="/admin" element={<AdminUpload />} />
+            {/* The /admin Route was removed because it is now a modal */}
           </Routes>
         </Container>
+
+        {/* --- NEW: The Admin Dialog Modal --- */}
+        <Dialog 
+          open={isAdminOpen} 
+          onClose={() => setIsAdminOpen(false)} 
+          maxWidth="sm" 
+          fullWidth
+        >
+          <AdminUpload onClose={() => setIsAdminOpen(false)} />
+        </Dialog>
+
       </Router>
     </ThemeProvider>
   );
