@@ -107,36 +107,35 @@ export default function PortfolioGrid() {
             </Typography>
             <Typography variant="h3" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>
               Experience:
-            </Typography>
-            Have no commercial experience yet, but worked on different websites projects by myself. Ready to learn and find new opportunities in this field.
+            </Typography >
             <Typography variant="h6" color="text.secondary" fontFamily={"-apple-system"} paragraph>
-              
+              Have no commercial experience yet, but worked on different websites projects by myself. Ready to learn and find new opportunities in this field.
             </Typography>
             
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>My Tech Stack:</Typography>
-              <Chip label="HTML/CSS/JS" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="React" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Node.js" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Adobe Cloud (Photoshop, Illustrator, Premiere Pro, After Effects)" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Kotlin" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Affinity" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Figma" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="FL Studio" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="HTML/CSS/JS" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="React" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Node.js" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Adobe Cloud (Photoshop, Illustrator, Premiere Pro, After Effects)" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Kotlin" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Affinity" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Figma" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="FL Studio" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>Soft Skills:</Typography>
-              <Chip label="Project Management" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Communication" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Problem Solving" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Teamwork" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Adaptability" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Leadership" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Project Management" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Communication" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Problem Solving" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Teamwork" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Adaptability" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Leadership" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>Languages:</Typography>
-              <Chip label="English:B2" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Ukrainian:Fluent" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="English:B2" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Ukrainian:Fluent" fontFamily={"-apple-system"} color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
