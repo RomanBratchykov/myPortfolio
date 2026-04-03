@@ -69,7 +69,6 @@ export default function PortfolioGrid() {
       );
     }
 
-    // FIX 2: Default fallback for Images / Designs
     return (
       <CardMedia
         component="img"
@@ -77,12 +76,10 @@ export default function PortfolioGrid() {
         image={item.fileUrl}
         alt={item.title}
         sx={{ 
-          // 'contain' ensures the whole image is visible without cropping!
           objectFit: 'contain', 
           maxHeight: maxHeight,
-          // Adds a subtle dark background in the grid if the image doesn't perfectly fit the 250px box
           backgroundColor: isModal ? 'transparent' : '#1a1a1a', 
-          p: isModal ? 0 : 1 // Adds a tiny bit of padding in the grid view
+          p: isModal ? 0 : 1 
         }}
       />
     );
@@ -101,23 +98,23 @@ export default function PortfolioGrid() {
             />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
+            <Typography variant="h3" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>
               Hi, I'm Roman Bratchykov
             </Typography>
-            <Typography variant="h6" color="text.secondary" paragraph>
+            <Typography variant="h6" color="text.secondary" fontFamily={"-apple-system"} paragraph>
               I am a 2nd-year Computer Science student at Chernivtsi National University. 
               I specialize in full-stack development and have a deep interest in music production and design.
             </Typography>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
+            <Typography variant="h3" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>
               Experience:
             </Typography>
             Have no commercial experience yet, but worked on different websites projects by myself. Ready to learn and find new opportunities in this field.
-            <Typography variant="h6" color="text.secondary" paragraph>
+            <Typography variant="h6" color="text.secondary" fontFamily={"-apple-system"} paragraph>
               
             </Typography>
             
             <Box sx={{ mb: 3 }}>
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>My Tech Stack:</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>My Tech Stack:</Typography>
               <Chip label="HTML/CSS/JS" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="React" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Node.js" color="primary" sx={{ mr: 1, mb: 1 }} />
@@ -128,7 +125,7 @@ export default function PortfolioGrid() {
               <Chip label="FL Studio" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Soft Skills:</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>Soft Skills:</Typography>
               <Chip label="Project Management" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Communication" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Problem Solving" color="primary" sx={{ mr: 1, mb: 1 }} />
@@ -137,7 +134,7 @@ export default function PortfolioGrid() {
               <Chip label="Leadership" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Languages:</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" fontFamily={"-apple-system"} gutterBottom>Languages:</Typography>
               <Chip label="English:B2" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Ukrainian:Fluent" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
@@ -163,11 +160,10 @@ export default function PortfolioGrid() {
       <Divider sx={{ mb: 6 }} />
 
 
-      <Typography id="my-work-section" variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 4, pt: 2 }}>
+      <Typography id="my-work-section" fontFamily={"-apple-system"} variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 4, pt: 2 }}>
         Featured Work
       </Typography>
 
-      {/* 🚨 NEW: Conditional rendering just for the grid area! 🚨 */}
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
           <CircularProgress color="primary" />
