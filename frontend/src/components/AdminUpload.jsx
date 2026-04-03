@@ -5,7 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 export default function AdminUpload() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('design');
-  const [description, setDescription] = useState(''); // NEW STATE
+  const [description, setDescription] = useState(''); 
   const [file, setFile] = useState(null);
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
@@ -63,7 +63,6 @@ export default function AdminUpload() {
           onChange={(e) => setTitle(e.target.value)} 
         />
 
-        {/* NEW DESCRIPTION FIELD */}
         <TextField 
           label="Project Description" 
           variant="outlined" 

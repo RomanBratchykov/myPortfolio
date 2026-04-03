@@ -139,16 +139,16 @@ export default function PortfolioGrid() {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-              <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/RomanBratchykov" target="_blank">
+              <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/RomanBratchykov" target="_blank" fontFamily={"-apple-system"}>
                 GitHub
               </Button>
-              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.linkedin.com/in/roman-bratchykov-9112b5330" target="_blank">
+              <Button variant="outlined" startIcon={<LinkedInIcon />} href="https://www.linkedin.com/in/roman-bratchykov-9112b5330" target="_blank" fontFamily={"-apple-system"}  >
                 LinkedIn
               </Button>
-              <Button variant="outlined" startIcon={<Link />} href="https://www.behance.net/romanbratchykov" target="_blank">
+              <Button variant="outlined" startIcon={<Link />} href="https://www.behance.net/romanbratchykov" target="_blank" fontFamily={"-apple-system"}>
                 Behance
               </Button>
-              <Button variant="outlined" startIcon={<Link />} href="https://cat-game-iota.vercel.app/" target="_blank">
+              <Button variant="outlined" startIcon={<Link />} href="https://cat-game-iota.vercel.app/" target="_blank" fontFamily={"-apple-system"}>
                 Pawland
               </Button>
             </Box>
@@ -190,7 +190,7 @@ export default function PortfolioGrid() {
               >
                 {renderMedia(item)}
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">{item.title}</Typography>
+                  <Typography gutterBottom variant="h5" fontFamily={"-apple-system"} component="h2">{item.title}</Typography>
                   <Chip label={item.category.toUpperCase()} color={item.category === 'music' ? 'secondary' : 'primary'} size="small" variant="outlined" />
                 </CardContent>
               </Card>
@@ -203,7 +203,7 @@ export default function PortfolioGrid() {
         {selectedItem && (
           <>
             <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h5" fontFamily={"-apple-system"} fontWeight="bold">
                 {selectedItem.title}
               </Typography>
               <IconButton onClick={handleClose} sx={{ color: (theme) => theme.palette.grey[500] }}>
@@ -217,11 +217,11 @@ export default function PortfolioGrid() {
               </Box>
               
               <Box sx={{ p: 3 }}>
-                <Chip label={selectedItem.category.toUpperCase()} color="primary" sx={{ mb: 2 }} />
-                <Typography variant="h6" gutterBottom fontWeight="bold">
+                <Chip label={selectedItem.category.toUpperCase()} fontFamily={"-apple-system"} color="primary" sx={{ mb: 2 }} />
+                <Typography variant="h6" fontFamily={"-apple-system"} gutterBottom fontWeight="bold">
                   About this project
                 </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-wrap' }}>
+                <Typography variant="body1" color="text.secondary" fontFamily={"-apple-system"} sx={{ whiteSpace: 'pre-wrap' }}>
                   {selectedItem.description || "No description provided for this project."}
                 </Typography>
               </Box>
