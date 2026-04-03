@@ -40,10 +40,10 @@ export default function App() {
       <Router>
         <AppBar position="sticky" elevation={3}>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+            <Typography variant="h6" fontFamily={"-apple-system"} component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
               My Portfolio
             </Typography>
-            <Button color="inherit" component={RouterLink} to="/">Main</Button>
+            <Button color="inherit" fontFamily={"-apple-system"} component={RouterLink} to="/">Main</Button>
             <Button color="inherit" onClick={() => scrollToSection('my-work-section')}>
               My Work
             </Button>
@@ -53,7 +53,6 @@ export default function App() {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Routes>
             <Route path="/" element={<PortfolioGrid />} />
-            {/* The /admin Route was removed because it is now a modal */}
           </Routes>
         </Container>
 
