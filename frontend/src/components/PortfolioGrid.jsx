@@ -92,13 +92,12 @@ export default function PortfolioGrid() {
 
   return (
     <div>
-      {/* --- ABOUT ME SECTION (Instantly Visible) --- */}
       <Box sx={{ mb: 8, mt: 4 }}>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }}>
             <Avatar 
               alt="Roman" 
-              src="/romanphoto.png" // Replace with your actual photo URL
+              src="/romanphoto.png" 
               sx={{ width: 250, height: 250, boxShadow: 3 }} 
             />
           </Grid>
@@ -156,8 +155,7 @@ export default function PortfolioGrid() {
 
       <Divider sx={{ mb: 6 }} />
 
-      {/* --- PORTFOLIO GRID --- */}
-      {/* Added id="my-work-section" here just in case you use the smooth scroll button! */}
+
       <Typography id="my-work-section" variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 4, pt: 2 }}>
         Featured Work
       </Typography>
@@ -199,7 +197,6 @@ export default function PortfolioGrid() {
         </Grid>
       )}
 
-      {/* --- PROJECT DETAIL MODAL --- */}
       <Dialog open={openModal} onClose={handleClose} maxWidth="md" fullWidth>
         {selectedItem && (
           <>

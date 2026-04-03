@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// The Schema is the blueprint for your data
 const portfolioItemSchema = new mongoose.Schema({
   description: { type: String, required: false },
   title: {
@@ -10,7 +9,7 @@ const portfolioItemSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['design', 'music', 'video'] // Restricts to only these options
+    enum: ['design', 'music', 'video'] 
   },
   fileUrl: {
     type: String,
@@ -19,13 +18,12 @@ const portfolioItemSchema = new mongoose.Schema({
 
     publicId: {
       type: String,
-      required: true // Storing this ensures we can delete the file from Cloudinary later
+      required: true 
     }
   },
   
   {
-    timestamps: true // Automatically adds createdAt and updatedAt fields
+    timestamps: true
   });
 
-// Export it so our server can use it
 module.exports = mongoose.model('PortfolioItem', portfolioItemSchema);

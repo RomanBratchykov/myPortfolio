@@ -14,10 +14,8 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
-  // --- NEW: State for the Admin Modal ---
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
-  // --- NEW: Hotkey Listener (Ctrl + M) ---
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'm') {
@@ -39,9 +37,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline /> {/* This resets basic browser margins and applies the dark background */}
+      <CssBaseline />
       <Router>
-        {/* Material Design Top Navigation */}
         <AppBar position="sticky" elevation={3}>
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
@@ -51,14 +48,9 @@ export default function App() {
             <Button color="inherit" onClick={() => scrollToSection('my-work-section')}>
               My Work
             </Button>
-            {/* UPDATED: Admin button now opens the modal instead of routing */}
-            {/* <Button color="inherit" onClick={() => setIsAdminOpen(true)}>
-              Admin
-            </Button> */}
           </Toolbar>
         </AppBar>
 
-        {/* Main Content Area */}
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Routes>
             <Route path="/" element={<PortfolioGrid />} />
@@ -66,7 +58,6 @@ export default function App() {
           </Routes>
         </Container>
 
-        {/* --- NEW: The Admin Dialog Modal --- */}
         <Dialog 
           open={isAdminOpen} 
           onClose={() => setIsAdminOpen(false)} 

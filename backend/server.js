@@ -8,7 +8,6 @@ const PortfolioItem = require('./models/PortfolioItem');
 
 const app = express();
 
-// 1. Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -17,7 +16,6 @@ console.log("Checking Environment Variables:");
 console.log("MONGO_URI exists?", !!process.env.MONGO_URI);
 console.log("Cloudinary Key exists?", !!process.env.CLOUDINARY_API_KEY);
 
-// 2. Configure Cloudinary v2
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -27,7 +25,6 @@ cloudinary.config({
 // 3. Multer with memory storage
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Helper: upload a buffer to Cloudinary and return the result
 const uploadToCloudinary = (buffer, options) =>
   new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(options, (error, result) => {
@@ -37,7 +34,6 @@ const uploadToCloudinary = (buffer, options) =>
     stream.end(buffer);
   });
 
-// 4. Admin auth middleware
 const verifyAdmin = (req, res, next) => {
   const clientPassword = req.headers['x-admin-password'];
   if (clientPassword === process.env.ADMIN_PASSWORD) {
@@ -47,7 +43,6 @@ const verifyAdmin = (req, res, next) => {
   }
 };
 
-// 5. Routes
 app.get('/', (req, res) => {
   res.send('Portfolio API is live and running!');
 });
@@ -106,13 +101,11 @@ app.delete('/api/content/:id', verifyAdmin, async (req, res) => {
   }
 });
 
-// 6. Start server FIRST, then connect to DB to satisfy Render's port binding timeout
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
   
-  // Connect to MongoDB with special flags to fix Render's network bug
   mongoose.connect(process.env.MONGO_URI, {
     serverSelectionTimeoutMS: 5000, // Stop hanging after 5 seconds
     family: 4 // THIS IS THE MAGIC FIX: It forces Render to use IPv4
