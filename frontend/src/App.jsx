@@ -44,7 +44,7 @@ export default function App() {
               My Portfolio
             </Typography>
             <Button color="inherit" fontFamily={"-apple-system"} component={RouterLink} to="/">Main</Button>
-            <Button color="inherit" onClick={() => scrollToSection('my-work-section')}>
+            <Button color="inherit" fontFamily={"-apple-system"} onClick={() => scrollToSection('my-work-section')}>
               My Work
             </Button>
           </Toolbar>
