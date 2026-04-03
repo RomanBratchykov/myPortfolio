@@ -4,12 +4,11 @@ import { ThemeProvider, createTheme, CssBaseline, AppBar, Toolbar, Typography, B
 import PortfolioGrid from './components/PortfolioGrid';
 import AdminUpload from './components/AdminUpload';
 
-// Create a modern dark theme
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: '#bb86fc' }, // A nice deep purple accent
-    background: { default: '#121212', paper: '#1e1e1e' }
+    primary: { main: '#7e45c4' }, 
+    background: { default: '#482323', paper: '#1e1e1e' }
   },
 });
 

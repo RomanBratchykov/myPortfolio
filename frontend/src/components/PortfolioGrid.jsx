@@ -44,7 +44,6 @@ export default function PortfolioGrid() {
   };
 
  const renderMedia = (item, isModal = false) => {
-    // FIX 1: If it's in the modal, let the image take up to 85% of the screen height (85vh)
     const height = isModal ? "auto" : "250";
     const maxHeight = isModal ? "85vh" : "auto";
 
@@ -107,18 +106,24 @@ export default function PortfolioGrid() {
             </Typography>
             <Typography variant="h6" color="text.secondary" paragraph>
               I am a 2nd-year Computer Science student at Chernivtsi National University. 
-              I specialize in design and have a deep interest in music, software engineering, mobile game development, and creating cross-platform applications.
+              I specialize in full-stack development and have a deep interest in music production and design.
+            </Typography>
+            <Typography variant="h3" fontWeight="bold" gutterBottom>
+              Experience:
+            </Typography>
+            Have no commercial experience yet, but worked on different websites projects by myself. Ready to learn and find new opportunities in this field.
+            <Typography variant="h6" color="text.secondary" paragraph>
+              
             </Typography>
             
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>My Tech Stack:</Typography>
-              <Chip label="C#" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="React & Vite" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="HTML/CSS/JS" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="React" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Node.js" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Entity Framework" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Adobe Cloud (Photoshop, Illustrator, Premiere Pro, After Effects)" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Kotlin" color="primary" sx={{ mr: 1, mb: 1 }} />
-              <Chip label="Affinity Designer" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Affinity" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Figma" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="FL Studio" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
@@ -131,6 +136,11 @@ export default function PortfolioGrid() {
               <Chip label="Adaptability" color="primary" sx={{ mr: 1, mb: 1 }} />
               <Chip label="Leadership" color="primary" sx={{ mr: 1, mb: 1 }} />
             </Box>
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Languages:</Typography>
+              <Chip label="English:B2" color="primary" sx={{ mr: 1, mb: 1 }} />
+              <Chip label="Ukrainian:Fluent" color="primary" sx={{ mr: 1, mb: 1 }} />
+            </Box>
 
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
               <Button variant="outlined" startIcon={<GitHubIcon />} href="https://github.com/RomanBratchykov" target="_blank">
@@ -142,11 +152,8 @@ export default function PortfolioGrid() {
               <Button variant="outlined" startIcon={<Link />} href="https://www.behance.net/romanbratchykov" target="_blank">
                 Behance
               </Button>
-              <Button variant="outlined" startIcon={<Link />} href="https://open.spotify.com/artist/1VdoNOymy0lWV5XnbzNxpf?si=q8J6bZv4RPemJO6RUHUF7w" target="_blank">
-                Spotify
-              </Button>
-              <Button variant="outlined" startIcon={<Link />} href="https://www.fiverr.com/s/Zmrlxpj" target="_blank">
-                Fiverr
+              <Button variant="outlined" startIcon={<Link />} href="https://cat-game-iota.vercel.app/" target="_blank">
+                Pawland
               </Button>
             </Box>
           </Grid>
@@ -210,8 +217,7 @@ export default function PortfolioGrid() {
             </DialogTitle>
             
             <DialogContent dividers sx={{ p: 0 }}>
-              {/* Show the media full size in the modal */}
-              <Box sx={{ width: '100%', backgroundColor: '#121212' }}>
+              <Box sx={{ width: '100%', backgroundColor: '#5f0f0f' }}>
                 {renderMedia(selectedItem, true)}
               </Box>
               
